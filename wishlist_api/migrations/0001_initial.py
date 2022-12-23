@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
                 ('on_sale', models.BooleanField(default=False)),
                 ('link', models.TextField(max_length=255)),
                 ('tags', models.CharField(max_length=50)),
-                ('been_purchase', models.BooleanField(default=False)),
+                ('been_purchased', models.BooleanField(default=False)),
             ],
         ),
     ]
