@@ -2,6 +2,7 @@ from django.shortcuts import render
 from rest_framework import generics
 from .serializers import UserAccountSerializer
 from .models import UserAccount
+from rest_framework import filters
 
 ### ALLOWS YOU TO CREATE AND CHECK PASSWORDS
 from django.contrib.auth.hashers import make_password, check_password
@@ -44,10 +45,5 @@ def check_login(request):
         else: #if email doesn't exist in db, return empty dict
             return JsonResponse({'error': 'email'})
 
-def user_search(req):
-    jsonRequest = json.loads(req.body)
-    search = jsonRequest['search']
-    if UserAccount.objects.filter(email__contains=search):
-        return UserAccount.objects.filter(email__contains=search)
-    else:
-        return JsonResponse({'error':'not found'})
+    
+   
