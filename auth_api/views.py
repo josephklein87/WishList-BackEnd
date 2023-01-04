@@ -43,3 +43,11 @@ def check_login(request):
                 return JsonResponse({'error':'password'})
         else: #if email doesn't exist in db, return empty dict
             return JsonResponse({'error': 'email'})
+
+def user_search(req):
+    jsonRequest = json.loads(req.body)
+    search = jsonRequest['search']
+    if UserAccount.objects.filter(email__contains=search):
+        return UserAccount.objects.filter(email__contains=search)
+    else:
+        return JsonResponse({'error':'not found'})
