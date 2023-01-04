@@ -6,7 +6,7 @@ class Wishlist(models.Model):
    gift_name = models.CharField(max_length=50)
    gift_price = models.IntegerField()
    on_sale = models.BooleanField(default=False)
-   link = models.TextField(max_length=255)
+   link = models.TextField(max_length=1000)
    tags = models.CharField(max_length=50)
    been_purchase = models.BooleanField(default=False)
    posted_by = models.CharField(max_length=20, default='admin')
