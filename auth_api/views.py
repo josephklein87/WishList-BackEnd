@@ -1,8 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import UserAccountSerializer
-from .models import UserAccount
-from rest_framework import filters
+from .serializers import *
+from .models import *
 
 ### ALLOWS YOU TO CREATE AND CHECK PASSWORDS
 from django.contrib.auth.hashers import make_password, check_password
@@ -12,6 +11,7 @@ from django.http import JsonResponse
 import json
 
 
+### USER ACCOUNT
 
 class UserAccountList(generics.ListCreateAPIView):
     queryset = UserAccount.objects.all().order_by('id')
@@ -45,5 +45,12 @@ def check_login(request):
         else: #if email doesn't exist in db, return empty dict
             return JsonResponse({'error': 'email'})
 
-    
-   
+        ### FOLLOW RELATIONSHIP
+
+    class FollowList(generics.ListCreateAPIView):
+        queryset = Follow.objects.all().order_by('id')
+        serializer_class = FollowSerializer
+
+    class FollowDetail(generics.RetrieveUpdateDestroyAPIView):
+        queryset = Follow.objects.all().order_by('id')
+        serializer_class = FollowSerializer
