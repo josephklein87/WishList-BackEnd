@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import UserAccount
+from .models import Follow
 
 ### ALLOWS YOU TO CREATE AND CHECK PASSWORDS
 from django.contrib.auth.hashers import make_password, check_password
@@ -27,3 +28,8 @@ class UserAccountSerializer(serializers.ModelSerializer):
         user.password = make_password(validated_data["password"])
         user.save()
         return user
+
+class FollowSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Follow
+        fields = ('id', 'user', 'following')    
