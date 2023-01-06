@@ -9,4 +9,5 @@ urlpatterns = [
     path('api/useraccount/search', views.user_search, name='user_search'),
     path('api/follow', views.FollowList.as_view(), name='follow_list'),
     path('api/follow/<int:pk>', views.FollowDetail.as_view(), name='follow_detail'),
+    path('api/followers/<int:pk>', views.ViewFollowingDetail.as_view(), name='view_following'),
 ]
