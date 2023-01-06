@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
                 ('gift_name', models.CharField(max_length=50)),
                 ('gift_price', models.IntegerField()),
                 ('on_sale', models.BooleanField(default=False)),
-                ('link', models.TextField(max_length=255)),
+                ('link', models.TextField(max_length=1000)),
                 ('tags', models.CharField(max_length=50)),
                 ('been_purchased', models.BooleanField(default=False)),
             ],
