@@ -45,12 +45,21 @@ def check_login(request):
         else: #if email doesn't exist in db, return empty dict
             return JsonResponse({'error': 'email'})
 
-        ### FOLLOW RELATIONSHIP
+def user_search(req):
+    jsonRequest = json.loads(req.body)
+    search = jsonRequest['search']
+    if UserAccount.objects.filter(email__contains=search):
+        return UserAccount.objects.filter(email__contains=search)
+    else:
+        return JsonResponse({'error':'not found'})
 
-    class FollowList(generics.ListCreateAPIView):
-        queryset = Follow.objects.all().order_by('id')
-        serializer_class = FollowSerializer
 
-    class FollowDetail(generics.RetrieveUpdateDestroyAPIView):
-        queryset = Follow.objects.all().order_by('id')
-        serializer_class = FollowSerializer
+### FOLLOW RELATIONSHIP
+
+class FollowList(generics.ListCreateAPIView):
+    queryset = Follow.objects.all().order_by('id')
+    serializer_class = FollowSerializer
+
+class FollowDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Follow.objects.all().order_by('id')
+    serializer_class = FollowSerializer
