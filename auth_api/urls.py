@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/useraccount/login', csrf_exempt(views.check_login), name="check_login"), # api/useraccount/login will be routed to the check_login function for auth
     path('api/follow', views.FollowList.as_view(), name='follow_list'),
     path('api/follow/<int:pk>', views.FollowDetail.as_view(), name='follow_detail'),
+    path('api/followers/<int:pk>', views.ViewFollowingDetail.as_view(), name='view_following'),
 ]

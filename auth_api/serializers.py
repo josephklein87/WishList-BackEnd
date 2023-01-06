@@ -10,7 +10,7 @@ from django.contrib.auth.hashers import make_password, check_password
 class UserAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = ('id', 'email', 'password', 'username')
+        fields = ('id', 'email', 'password', 'username', 'birthday')
 
     ### THIS HASHES A NEW USERS PASSWORD WHEN THEY CREATE AN ACCOUNT
     def create(self, validated_data):
@@ -32,4 +32,32 @@ class UserAccountSerializer(serializers.ModelSerializer):
 class FollowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Follow
-        fields = ('id', 'user', 'following')    
+        fields = ('id', 'user', 'following')
+
+
+class UserAccountFollowing(serializers.ModelSerializer):
+
+    follower_list = serializers.SerializerMethodField()
+    following_list = serializers.SerializerMethodField()
+
+    class Meta:
+        model = UserAccount
+        fields = ('id', 'email', 'username', 'follower_list', 'following_list')
+
+    def get_follower_list(self, obj):
+        obj.follower_list = []
+        for item in obj.followers.all():
+            obj.follower_list.append(item.user.username)
+        return obj.follower_list
+
+    def get_following_list(self, obj):
+        obj.following_list = []
+        for item in obj.following.all():
+            obj.following_list.append(item.following.username)
+        return obj.following_list
+
+
+    
+
+
+        

@@ -63,3 +63,7 @@ class FollowList(generics.ListCreateAPIView):
 class FollowDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Follow.objects.all().order_by('id')
     serializer_class = FollowSerializer
+
+class ViewFollowingDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserAccount.objects.all().order_by('id')
+    serializer_class = UserAccountFollowing
