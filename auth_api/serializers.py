@@ -17,7 +17,8 @@ class UserAccountSerializer(serializers.ModelSerializer):
         user = UserAccount.objects.create(
         email=validated_data['email'],
         password = make_password(validated_data['password']),
-        username = validated_data['username']
+        username = validated_data['username'],
+        birthday = validated_data['birthday']
         )
         user.save()
         return user
